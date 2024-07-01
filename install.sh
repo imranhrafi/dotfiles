@@ -3,7 +3,7 @@
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
 rm -rf $HOME/.config/alacritty
-ln -s $DOTFILES/alacritty $HOME/.config/alacritty
+ln -s $DOTFILES/ala $HOME/.config/alacritty
 
 rm -rf $HOME/.tmux.conf
 ln -s $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
@@ -15,3 +15,6 @@ ln -s $DOTFILES/scripts/t $HOME/.local/bin/t
 
 rm -rf $HOME/.config/nvim
 ln -s $DOTFILES/nvim $HOME/.config/nvim
+
+rm -rf $HOME/.config/hypr
+ln -s $DOTFILES/nvim $HOME/.config/hypr
