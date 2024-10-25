@@ -1,0 +1,5 @@
+/wezterm/luarocks.bat
+/wezterm/lua.bat
+/wezterm/lua_modules
+/wezterm/.luarocks
+/wezterm/.DS_Store
