@@ -105,70 +105,97 @@ function cleanup
     end
 end
 
-## Useful aliases
+# Useful aliases
 
 # Replace ls with eza
-alias ls 'eza -al --color=always --group-directories-first --icons' # preferred listing
-alias la 'eza -a --color=always --group-directories-first --icons' # all files and dirs
-alias ll 'eza -l --color=always --group-directories-first --icons' # long format
-alias lt 'eza -aT --color=always --group-directories-first --icons' # tree listing
-alias l. 'eza -ald --color=always --group-directories-first --icons .*' # show only dotfiles
+alias ls="eza -al --color=always --group-directories-first --icons" # preferred listing
+alias la="eza -a --color=always --group-directories-first --icons" # all files and dirs
+alias ll="eza -l --color=always --group-directories-first --icons" # long format
+alias lt="eza -aT --color=always --group-directories-first --icons" # tree listing
+alias l.="eza -ald --color=always --group-directories-first --icons .*" # show only dotfiles
 
 # Replace some more things with better alternatives
-alias cat 'bat --style header --style snip --style changes --style header'
+alias cat="bat --style header --style snip --style changes --style header"
 if not test -x /usr/bin/yay; and test -x /usr/bin/paru
-    alias yay paru
+    alias yay="paru"
 end
 
-
 # Common use
-alias .. 'cd ..'
-alias ... 'cd ../..'
-alias .... 'cd ../../..'
-alias ..... 'cd ../../../..'
-alias ...... 'cd ../../../../..'
-alias c clear
-alias vim nvim
-alias big 'expac -H M "%m\t%n" | sort -h | nl' # Sort installed packages according to size in MB (expac must be installed)
-alias dir 'dir --color=auto'
-alias fixpacman 'sudo rm /var/lib/pacman/db.lck'
-alias gitpkg 'pacman -Q | grep -i "\-git" | wc -l' # List amount of -git packages
-alias grep 'ugrep --color=auto'
-alias egrep 'ugrep -E --color=auto'
-alias fgrep 'ugrep -F --color=auto'
-alias grubup 'sudo update-grub'
-alias hw 'hwinfo --short' # Hardware Info
-alias ip 'ip -color'
-alias psmem 'ps auxf | sort -nr -k 4'
-alias psmem10 'ps auxf | sort -nr -k 4 | head -10'
-alias rmpkg 'sudo pacman -Rdd'
-alias tarnow 'tar -acf '
-alias untar 'tar -zxvf '
-alias upd /usr/bin/garuda-update
-alias vdir 'vdir --color=auto'
-alias wget 'wget -c '
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias c="clear"
+alias vim="nvim"
+alias big="expac -H M \"%m\t%n\" | sort -h | nl" # Sort installed packages according to size in MB (expac must be installed)
+alias dir="dir --color=auto"
+alias fixpacman="sudo rm /var/lib/pacman/db.lck"
+alias gitpkg="pacman -Q | grep -i \"\-git\" | wc -l" # List amount of -git packages
+alias grep="ugrep --color=auto"
+alias egrep="ugrep -E --color=auto"
+alias fgrep="ugrep -F --color=auto"
+alias grubup="sudo update-grub"
+alias hw="hwinfo --short" # Hardware Info
+alias ip="ip -color"
+alias psmem="ps auxf | sort -nr -k 4"
+alias psmem10="ps auxf | sort -nr -k 4 | head -10"
+alias rmpkg="sudo pacman -Rdd"
+alias tarnow="tar -acf "
+alias untar="tar -zxvf "
+alias upd="/usr/bin/garuda-update"
+alias vdir="vdir --color=auto"
+alias wget="wget -c"
+alias y="yazi"
+# Shadcn
+alias shadcn="bunx --bun shadcn-ui@latest add"
+#Postgresql
+alias pgstart='sudo systemctl start postgresql'
+alias pgenable='sudo systemctl enable postgresql'
+alias pgstatus='sudo systemctl status postgresql'
+alias pgstop='sudo systemctl stop postgresql'
+alias psql='sudo -iu postgres psql'
+# Prisma
+alias pstudio='npx prisma studio'
+alias pgenerate='npx prisma generate'
+alias pmigrate='npx prisma migrate dev'
 
-#Shadcn
-alias shadcn pnpm dlx shadcn-ui@latest add
+#git
+alias gaa="git add ."
+alias gac='git add . && git commit -m'
+alias gp="git push"
+alias gcm='git commit -m'
 
+# Connect to a specific database
+function psql_db
+    if test (count $argv) -eq 0
+        echo "Usage: psql_db <database>"
+    else
+        sudo -iu postgres psql -d $argv[1]
+    end
+end
 # Get fastest mirrors
-alias mirror 'sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist'
-alias mirrora 'sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist'
-alias mirrord 'sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist'
-alias mirrors 'sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist'
+alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
+alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
+alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
+alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
 
 # Help people new to Arch
-alias apt 'man pacman'
-alias apt-get 'man pacman'
-alias p 'sudo pacman -S'
-alias pr 'sudo pacman -Rs'
-alias please sudo
-alias tb 'nc termbin.com 9999'
-alias helpme 'echo "To print basic information about a command use tldr <command>"'
-alias pacdiff 'sudo -H DIFFPROG=meld pacdiff'
+alias apt="man pacman"
+alias apt-get="man pacman"
+alias p="sudo pacman -S"
+alias pr="sudo pacman -Rs"
+alias please="sudo"
+alias tb="nc termbin.com 9999"
+alias helpme="echo 'To print basic information about a command use tldr <command>'"
+alias pacdiff="sudo -H DIFFPROG=meld pacdiff"
 
 # Get the error messages from journalctl
-alias jctl 'journalctl -p 3 -xb'
+alias jctl="journalctl -p 3 -xb"
 
 # Recent installed packages
-alias rip 'expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
+alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH

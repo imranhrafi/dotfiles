@@ -47,26 +47,24 @@ require("lazy").setup({
 			"kyazdani42/nvim-tree.lua",
 			event = "VimEnter",
 			config = function()
-					require('nvim-tree').setup({
-						sort = {
-							sorter = "case_sensitive",
-						},
-						view = {
-							width = 30,
-						},
-						renderer = {
-							group_empty = true,
-						},
-						filters = {
-							dotfiles = true,
-						},
-					})
-			end
-	},
-
-			(			-- { import = "lazyvim.plugins.extras.dap.core" },
-			-- { import = "lazyvim.plugins.extras.vscode" },
-{ import = "lazyvim.plugins.extras.util.mini-hipatterns" }),
+				require("nvim-tree").setup({
+					sort = {
+						sorter = "case_sensitive",
+					},
+					view = {
+						width = 30,
+					},
+					renderer = {
+						group_empty = true,
+					},
+					filters = {
+						dotfiles = true,
+					},
+				})
+			end,
+		},
+		-- { import = "lazyvim.plugins.extras.vscode" },
+		{ import = "lazyvim.plugins.extras.util.mini-hipatterns" },
 		-- { import = "lazyvim.plugins.extras.test.core" },
 		-- { import = "lazyvim.plugins.extras.coding.yanky" },
 		-- { import = "lazyvim.plugins.extras.editor.mini-files" },
