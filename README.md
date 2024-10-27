@@ -19,7 +19,7 @@ cd dotfiles
 Make the `scripts/t` and `install.sh` files executable by running the following commands:
 
 ```bash
-chmod +x install.sh scripts/t software.sh
+chmod +x install.sh scripts/t software.sh symlink.sh
 ```
 
 ## Step 3: Update Script Paths

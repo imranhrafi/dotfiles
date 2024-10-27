@@ -43,6 +43,7 @@ install_yay
 echo "Installing packages from official repositories..."
 sudo pacman -S --noconfirm --needed \
     alacritty \
+    wezterm \
     fish \
     neovim \
     tmux \
@@ -51,7 +52,9 @@ sudo pacman -S --noconfirm --needed \
     vlc \
     python \
     postgresql \
-    nodejs
+    nodejs \
+    npm \
+    unzip \
 check_success "Failed to install official repository packages."
 
 # Install packages from AUR using yay
@@ -60,7 +63,9 @@ yay -S --noconfirm --needed \
     nerd-fonts-noto-sans-mono \
     postman \
     google-chrome \
-    visual-studio-code-bin
+    visual-studio-code-bin \
+    eza \
+
 check_success "Failed to install AUR packages."
 
 # Install Bun
