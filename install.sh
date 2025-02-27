@@ -3,18 +3,18 @@
 # Get directory containing dotfiles
 DOTFILES_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-# Refresh mirrors for faster and more reliable downloads
-echo "Updating package mirrors for optimized download speeds..."
-sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+# # Refresh mirrors for faster and more reliable downloads
+# echo "Updating package mirrors for optimized download speeds..."
+# sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
-# Full system update
-echo "Updating system packages to avoid conflicts..."
-sudo pacman -Syu --noconfirm
+# # Full system update
+# echo "Updating system packages to avoid conflicts..."
+# sudo pacman -Syu --noconfirm
 
 
-# Run software installation script
-echo "Running software installation script..."
-"$DOTFILES_DIR/software.sh"
+# # Run software installation script
+# echo "Running software installation script..."
+# "$DOTFILES_DIR/software.sh"
 
 # Function to create symlinks with error handling
 create_symlink() {
