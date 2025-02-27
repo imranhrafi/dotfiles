@@ -2,38 +2,24 @@
 
 # Credit to ThePrimeagen
 
+# Check if a project directory is provided as an argument
 if [[ $# -eq 1 ]]; then
-	selected=$1
+	selected="$1"
 else
-	items=$(find /projects/ -maxdepth 1 -mindepth 1 -type d)
+	# Find directories in the project path
+	items=$(find ~/mnt/projects -maxdepth 1 -mindepth 1 -type d)
 	items+=$(echo -e "\n/tmp")
 	selected=$(echo "$items" | fzf)
 fi
 
-dirname=$(basename $selected | sed 's/\./_/g')
+# Sanitize the directory name for tmux session naming
+dirname=$(basename "$selected" | sed 's/\./_/g')
 
-tmux switch-client -t =$dirname
+# Try to switch to an existing tmux session with the directory name
+tmux switch-client -t "=$dirname"
 if [[ $? -eq 0 ]]; then
 	exit 0
 fi
 
-tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname!/usr/bin/env bash
-
-# Credit to ThePrimeagen
-
-if [[ $# -eq 1 ]]; then
-	selected=$1
-else
-	items=$(find ~/Code/laracasts -maxdepth 1 -mindepth 1 -type d)
-	items+=$(echo -e "\n/tmp")
-	selected=$(echo "$items" | fzf)
-fi
-
-dirname=$(basename $selected | sed 's/\./_/g')
-
-tmux switch-client -t =$dirname
-if [[ $? -eq 0 ]]; then
-	exit 0
-fi
-
-tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname
+# Create a new tmux session or attach to an existing one
+tmux new-session -c "$selected" -d -s "$dirname" && tmux switch-client -t "$dirname" || tmux new -c "$selected" -A -s "$dirname"
