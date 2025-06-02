@@ -1,5 +1,60 @@
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+*~
+
+# Backup and temp files
+*.bak
+*.tmp
+*.temp
+
+# Logs
+*.log
+
+# Node modules (if you use node in your dotfiles)
+node_modules/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Mac system files
+.AppleDouble
+.LSOverride
+
+# Linux/Mac trash
+.Trash-*
+
+# Wezterm build and cache files
 /wezterm/luarocks.bat
 /wezterm/lua.bat
 /wezterm/lua_modules
 /wezterm/.luarocks
 /wezterm/.DS_Store
+
+# Other common dotfile tool caches
+.zcompdump*
+.zsh_history
+.zsh_sessions
+.zshrc.pre-oh-my-zsh
+.zshrc.zni
+.zshrc.zwc
+.zshrc.zwc.old
+.zshrc.zwc.new
+.zshrc.zwc.tmp
+.zshrc.zwc.bak
+
+# GPG and SSH agent files
+*.gpg-agent-info
+*.ssh-agent-info
+
+# Ignore local machine-specific files
+local/
