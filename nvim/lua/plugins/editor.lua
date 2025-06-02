@@ -1,3 +1,6 @@
+-- /lua/plugins/editor.lua
+
+
 return {
 	{
 		enabled = false,
@@ -34,7 +37,8 @@ return {
 			},
 		},
 	},
-
+-- coding.lua
+{ "windwp/nvim-ts-autotag", opts = { enable = true } },
 	{
 		"dinhhuy258/git.nvim",
 		event = "BufReadPre",

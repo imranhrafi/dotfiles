@@ -1,3 +1,5 @@
+
+-- lua/plugins/treesitter.lua
 return {
 	{ "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
 
@@ -5,22 +7,8 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		opts = {
 			ensure_installed = {
-				"astro",
-				"cmake",
-				"cpp",
-				"css",
-				"fish",
-				"gitignore",
-				"go",
-				"graphql",
-				"http",
-				"java",
-				"php",
-				"rust",
-				"scss",
-				"sql",
-				"svelte",
-
+				"astro", "cmake", "cpp", "css", "fish", "gitignore", "go", "graphql", "http",
+				"java", "php", "rust", "scss", "sql", "svelte", "tsx", "jsx",
 			},
 
 			-- matchup = {

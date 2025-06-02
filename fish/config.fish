@@ -139,8 +139,21 @@ alias l="eza -ald --color=always --group-directories-first --icons .*" # Show on
 alias cat="bat --style header --style snip --style changes --style header"  # Better cat
 alias dir="dir --color=auto"
 alias vdir="vdir --color=auto"
+alias data="cd /mnt/Data/dev-projects"             # Quick access to data partition
+alias project="cd /mnt/Projects"             # Quick access to data partition
 alias tree="tree -I 'node_modules|.next'"  # Tree with exclusions
 alias y="yazi"  # File explorer
+alias yp="yazi .."  # Open parent directory
+alias yd="yazi ~/Downloads"  # Quick access to Downloads
+alias ydox="yazi ~/Documents"  # Quick access to Documents
+alias yd="yazi /mnt/Data"  # Quick access to DATA
+alias ypjt="yazi /mnt/Projects"  # Quick access to Projects
+alias yu="yazi; cd (yazi --cwd)"  # Open Yazi and go up one level on exit
+alias ycd="yazi; cd (yazi --cwd)"  # Open Yazi and change to last visited dir on exit
+alias yv="yazi --preview"  # Preview a file
+alias ye="nvim (yazi --select)"  # Edit last selected file in Neovim
+alias yf="set file (yazi --select | fzf); and test -n \"$file\"; and nvim \"$file\""  # Find and open files with fzf
+
 
 ## Navigation
 alias ..="cd .."
@@ -183,6 +196,7 @@ alias pgenable='sudo systemctl enable postgresql' # Enable on boot
 alias pgstatus='sudo systemctl status postgresql' # Check status
 alias pgstop='sudo systemctl stop postgresql'     # Stop PostgreSQL
 alias psql='sudo -iu postgres psql'               # Access psql as postgres user
+alias dburl='postgresql://postgres:0099@localhost:5432/saas'  # Database URL
 
 ## Prisma
 alias pstudio='npx prisma studio'     # Launch Prisma Studio
@@ -212,6 +226,7 @@ alias please="sudo"                   # Polite sudo
 alias apt="man pacman"                # Help for apt users
 alias apt-get="man pacman"            # Help for apt-get users
 alias helpme="echo 'To print basic information about a command use tldr <command>'"
+
 
 ## File and Directory Management
 alias rmrf="rm -rf"                   # Force recursive delete (use with caution)
@@ -245,6 +260,28 @@ alias python="python3"                # Default to Python 3
 alias pingg="ping google.com"         # Quick ping test
 alias myip="curl ifconfig.me"         # Get public IP
 alias ports="ss -tuln"                # List open ports
+
+# Cursor Ai Editor
+alias cursor-cache-remove="rm -rf ~/.config/Cursor ~/.cache/Cursor"  # Clear Cursor AI cache
+alias regen-cursor='rm -rf ~/.config/Cursor ~/.cache/Cursor; sudo rm /etc/machine-id; and sudo systemd-machine-id-setup'
+
+#pnpm
+alias pn='pnpm'
+alias px='pnpm dlx'
+alias pd='pnpm run dev'
+alias pn-update='pnpm update --latest'  # Update all packages to latest version
+alias pndev='pnpm run dev'  # Run development server
+alias pnbuild='pnpm run build'  # Build project
+alias shadcn='pnpm dlx shadcn@latest add '
+alias npm='pnpm'  # Use bun as npm
+alias npx='pnpm dlx'
+
+
+
+#bun
+alias bunshadcn='pnpm dlx shadcn@latest add'  # Add Shadcn components
+
+
 
 
 # bun

@@ -1,0 +1,27 @@
+[keymap.normal]
+# File actions
+"y" = "yank"              # Yank file (copy)
+"m" = "move"              # Mark file for move
+"p" = "paste"             # Paste here
+"d" = "remove"            # Delete
+"r" = "rename"            # Rename
+"u" = ":reset"            # Cancel all yanked/moved files
+
+# Navigation
+"g" = ":cd ~"             # Go to home
+"." = "toggle_hidden"     # Toggle dotfiles
+"/" = "search"            # Search
+"b" = ":cd .."            # Back one directory
+"c" = ":copy_path"        # Copy full path
+"C" = ":copy_path --relative"  # Copy relative path
+
+# Useful shortcuts
+"q" = "quit"              # Quit Yazi
+"space" = "preview"       # Preview file
+"enter" = "open"          # Open file/folder
+"esc" = "escape"          # Clear select/reset UI
+
+# Marking multiple files
+"tab" = "toggle --keep"   # Toggle file selection
+"a" = "toggle_all"        # Toggle all files
+

@@ -1,107 +1,88 @@
 local discipline = require("craftzdog.discipline")
-
 discipline.cowboy()
 
-local keymap = vim.keymap
+-- Alias for cleaner usage
+local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
--- Do things without affecting the registers
-keymap.set("n", "x", '"_x')
-keymap.set("n", "<Leader>p", '"0p')
-keymap.set("n", "<Leader>P", '"0P')
-keymap.set("v", "<Leader>p", '"0p')
-keymap.set("n", "<Leader>c", '"_c')
-keymap.set("n", "<Leader>C", '"_C')
-keymap.set("v", "<Leader>c", '"_c')
-keymap.set("v", "<Leader>C", '"_C')
-keymap.set("n", "<Leader>d", '"_d')
-keymap.set("n", "<Leader>D", '"_D')
-keymap.set("v", "<Leader>d", '"_d')
-keymap.set("v", "<Leader>D", '"_D')
+-- Utility function to simplify repetitive leader mappings
+local function map_leader(modes, lhs, rhs, desc)
+  for _, mode in ipairs(modes) do
+    keymap(mode, "<Leader>" .. lhs, rhs, { desc = desc, noremap = true, silent = true })
+  end
+end
 
--- Increment/decrement
-keymap.set("n", "+", "<C-a>")
-keymap.set("n", "-", "<C-x>")
--- When text is wrapped, move by terminal rows, not lines, unless a count is provided.
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
+-- === Editing ===
+map_leader({ "n" }, "p", '"0p', "Paste last yank (below)")
+map_leader({ "n" }, "P", '"0P', "Paste last yank (above)")
+map_leader({ "v" }, "p", '"0p', "Paste last yank over selection")
+map_leader({ "n", "v" }, "c", '"_c', "Change without yanking")
+map_leader({ "n", "v" }, "C", '"_C', "Change to EOL without yanking")
+map_leader({ "n", "v" }, "d", '"_d', "Delete without yanking")
+map_leader({ "n", "v" }, "D", '"_D', "Delete to EOL without yanking")
+keymap("n", "x", '"_x', { desc = "Delete char without yanking", noremap = true, silent = true })
+keymap("v", "p", '"_dP', { desc = "Paste over without yanking", noremap = true, silent = true })
+keymap("n", "dw", 'vb"_d', { desc = "Delete word backwards", noremap = true, silent = true })
 
--- Reselect visual selection after indenting.
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
+-- Increment/Decrement
+keymap("n", "+", "<C-a>", { desc = "Increment number", noremap = true, silent = true })
+keymap("n", "-", "<C-x>", { desc = "Decrement number", noremap = true, silent = true })
 
--- Paste replace visual selection without copying it.
-vim.keymap.set("v", "p", '"_dP')
+-- === Navigation ===
+keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Move up (wrapped)", expr = true, silent = true })
+keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Move down (wrapped)", expr = true, silent = true })
+keymap("n", "<C-i>", "<C-i>", { desc = "Jump forward in jumplist", noremap = true, silent = true }) -- Avoid <C-m> collision
 
--- Quickly clear search highlighting.
-vim.keymap.set("n", "<Leader>k", ":nohlsearch<CR>")
+-- === Visual Mode ===
+keymap("v", "<", "<gv", { desc = "Indent left and reselect", noremap = true, silent = true })
+keymap("v", ">", ">gv", { desc = "Indent right and reselect", noremap = true, silent = true })
 
--- Move lines up and down.
-vim.keymap.set("i", "<A-j>", "<Esc>:move .+1<CR>==gi")
-vim.keymap.set("i", "<A-k>", "<Esc>:move .-2<CR>==gi")
-vim.keymap.set("n", "<A-j>", ":move .+1<CR>==")
-vim.keymap.set("n", "<A-k>", ":move .-2<CR>==")
-vim.keymap.set("v", "<A-j>", ":move '>+1<CR>gv=gv")
-vim.keymap.set("v", "<A-k>", ":move '<-2<CR>gv=gv")
--- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
+-- === Line Movement ===
+keymap("n", "<A-j>", ":move .+1<CR>==", { desc = "Move line down", noremap = true, silent = true })
+keymap("n", "<A-k>", ":move .-2<CR>==", { desc = "Move line up", noremap = true, silent = true })
+keymap("i", "<A-j>", "<Esc>:move .+1<CR>==gi", { desc = "Move line down (insert)", noremap = true, silent = true })
+keymap("i", "<A-k>", "<Esc>:move .-2<CR>==gi", { desc = "Move line up (insert)", noremap = true, silent = true })
+keymap("v", "<A-j>", ":move '>+1<CR>gv=gv", { desc = "Move selection down", noremap = true, silent = true })
+keymap("v", "<A-k>", ":move '<-2<CR>gv=gv", { desc = "Move selection up", noremap = true, silent = true })
 
--- Save file and quit
-keymap.set("n", "<Leader>W", ":update<Return>", opts)
-keymap.set("n", "<Leader>q", ":quit<Return>", opts)
-keymap.set("n", "<Leader>Q", ":qa<Return>", opts)
+-- === File & Buffer Management ===
+keymap("n", "<C-a>", "ggVG", { desc = "Select all", noremap = true, silent = true }) -- Simplified from gg<S-v>G
+keymap("n", "<Leader>w", ":update<CR>", { desc = "Save file", noremap = true, silent = true })
+keymap("n", "<Leader>q", ":quit<CR>", { desc = "Quit current window", noremap = true, silent = true })
+keymap("n", "<Leader>Q", ":qa<CR>", { desc = "Quit all", noremap = true, silent = true })
+keymap("n", "<Leader>k", ":nohlsearch<CR>", { desc = "Clear search highlight", noremap = true, silent = true })
 
-vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = 'Show explorer' })
-keymap.set("n", "<Leader>f", ":NvimTreeFindFile<Return>", opts)
+-- === Window Management ===
+keymap("n", "ss", ":split<CR>", { desc = "Horizontal split", noremap = true, silent = true })
+keymap("n", "sv", ":vsplit<CR>", { desc = "Vertical split", noremap = true, silent = true })
+keymap("n", "sh", "<C-w>h", { desc = "Move to left window", noremap = true, silent = true })
+keymap("n", "sj", "<C-w>j", { desc = "Move to below window", noremap = true, silent = true })
+keymap("n", "sk", "<C-w>k", { desc = "Move to above window", noremap = true, silent = true })
+keymap("n", "sl", "<C-w>l", { desc = "Move to right window", noremap = true, silent = true })
+keymap("n", "<C-left>", "<C-w><", { desc = "Decrease width", noremap = true, silent = true })
+keymap("n", "<C-right>", "<C-w>>", { desc = "Increase width", noremap = true, silent = true })
+keymap("n", "<C-up>", "<C-w>+", { desc = "Increase height", noremap = true, silent = true })
+keymap("n", "<C-down>", "<C-w>-", { desc = "Decrease height", noremap = true, silent = true })
 
+-- === Tab Management ===
+keymap("n", "te", ":tabedit<CR>", { desc = "New tab", noremap = true, silent = true })
+keymap("n", "<Tab>", ":tabnext<CR>", { desc = "Next tab", noremap = true, silent = true })
+keymap("n", "<S-Tab>", ":tabprevious<CR>", { desc = "Previous tab", noremap = true, silent = true })
 
--- markdown preview
-vim.keymap.set("n", "<leader>mp", ":MarkdownPreviewToggle<cr>")
+-- === Plugins ===
+keymap("n", "<Leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle file explorer", noremap = true, silent = true })
+keymap("n", "<Leader>f", ":NvimTreeFindFile<CR>", { desc = "Find file in explorer", noremap = true, silent = true })
+keymap("n", "<Leader>mp", ":MarkdownPreviewToggle<CR>", { desc = "Toggle Markdown preview", noremap = true, silent = true })
+keymap("n", "<Leader>r", function()
+  local ok, hsl = pcall(require, "craftzdog.hsl")
+  if ok then hsl.replaceHexWithHSL() else vim.notify("HSL module not found", "error") end
+end, { desc = "Replace hex with HSL", noremap = true, silent = true })
+keymap("n", "<Leader>i", function()
+  local ok, lsp = pcall(require, "craftzdog.lsp")
+  if ok then lsp.toggleInlayHints() else vim.notify("LSP module not found", "error") end
+end, { desc = "Toggle inlay hints", noremap = true, silent = true })
 
--- Delete a word backwards
-keymap.set("n", "dw", 'vb"_d')
-
--- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
-
--- Save with root permission (not working for now)
---vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
-
--- Disable continuations
-keymap.set("n", "<Leader>o", "o<Esc>^Da", opts)
-keymap.set("n", "<Leader>O", "O<Esc>^Da", opts)
-
--- Jumplist
-keymap.set("n", "<C-m>", "<C-i>", opts)
-
--- New tab
-keymap.set("n", "te", ":tabedit")
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
--- Split window
-keymap.set("n", "ss", ":split<Return>", opts)
-keymap.set("n", "sv", ":vsplit<Return>", opts)
--- Move window
-keymap.set("n", "sh", "<C-w>h")
-keymap.set("n", "sk", "<C-w>k")
-keymap.set("n", "sj", "<C-w>j")
-keymap.set("n", "sl", "<C-w>l")
-
--- Resize window
-keymap.set("n", "<C-w><left>", "<C-w><")
-keymap.set("n", "<C-w><right>", "<C-w>>")
-keymap.set("n", "<C-w><up>", "<C-w>+")
-keymap.set("n", "<C-w><down>", "<C-w>-")
-
--- Diagnostics
-keymap.set("n", "<C-j>", function()
-	vim.diagnostic.goto_next()
-end, opts)
-
-keymap.set("n", "<leader>r", function()
-	require("craftzdog.hsl").replaceHexWithHSL()
-end)
-
-keymap.set("n", "<leader>i", function()
-	require("craftzdog.lsp").toggleInlayHints()
-end)
+-- === Miscellaneous ===
+keymap("n", "<Leader>o", "o<Esc>^Da", { desc = "New line below (no auto-indent)", noremap = true, silent = true })
+keymap("n", "<Leader>O", "O<Esc>^Da", { desc = "New line above (no auto-indent)", noremap = true, silent = true })
+keymap("n", "<C-j>", vim.diagnostic.goto_next, { desc = "Next diagnostic", noremap = true, silent = true })

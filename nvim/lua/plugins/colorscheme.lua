@@ -1,3 +1,5 @@
+-- /lua/plugins/colorscheme.lua
+
 return {
 	{
 		"scottmckendry/cyberdream.nvim",

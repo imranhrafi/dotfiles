@@ -1,3 +1,5 @@
+-- lua/plugins/lsp.lua
+
 return {
 	-- tools
 	{
@@ -5,6 +7,7 @@ return {
 		opts = function(_, opts)
 			vim.list_extend(opts.ensure_installed, {
 				"stylua",
+
 				"selene",
 				"luacheck",
 				"shellcheck",
@@ -12,7 +15,13 @@ return {
 				"tailwindcss-language-server",
 				"typescript-language-server",
 				"css-lsp",
+				"eslint_d", "prettier",
 			})
+			servers = {
+				eslint = {
+					settings = { workingDirectory = { mode = "auto" } },
+				},
+			}
 		end,
 	},
 
