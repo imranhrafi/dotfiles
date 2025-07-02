@@ -6,6 +6,8 @@
 "d" = "remove"            # Delete
 "r" = "rename"            # Rename
 "u" = ":reset"            # Cancel all yanked/moved files
+"e" = ":extract"            # Extract archive here
+"i" = ":file_info"          # Show file info
 
 # Navigation
 "g" = ":cd ~"             # Go to home
@@ -14,6 +16,7 @@
 "b" = ":cd .."            # Back one directory
 "c" = ":copy_path"        # Copy full path
 "C" = ":copy_path --relative"  # Copy relative path
+"G" = ":cd /"               # Jump to root directory
 
 # Useful shortcuts
 "q" = "quit"              # Quit Yazi
@@ -24,4 +27,5 @@
 # Marking multiple files
 "tab" = "toggle --keep"   # Toggle file selection
 "a" = "toggle_all"        # Toggle all files
+"t" = ":shell"              # Open terminal here
 

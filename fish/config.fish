@@ -287,3 +287,8 @@ alias bunshadcn='pnpm dlx shadcn@latest add'  # Add Shadcn components
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+# Next.js aliases
+alias nextdev="npm run dev"
+alias nextbuild="npm run build"
+alias nextlint="npm run lint"
