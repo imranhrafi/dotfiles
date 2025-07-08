@@ -71,8 +71,16 @@ function create-convex
     pnpm dlx shadcn@latest add button input label form card dialog alert-dialog sonner tooltip select tabs accordion switch dropdown-menu textarea table avatar badge progress skeleton popover sheet
   end
 
-  echo "✅ Setup complete! → cd $project && pnpm run dev"
+  echo "🔧 Initializing Git repository..."
+  git init
+  git add .
+  git commit -m "Initial commit: Convex + Next.js + shadcn/ui setup"
+  git branch -M main
+
+  echo "✅ Project '$project' ready!"
+  echo "👉 cd $project && pnpm run dev"
 end
+
 
 
 
