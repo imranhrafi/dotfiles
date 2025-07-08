@@ -1,0 +1,47 @@
+Fish Function Creation Prompt
+Context
+I'm using Fish shell and have a Git Function Power Pack. I need you to create a new Fish function that follows the same patterns and standards as my existing functions.
+My Requirements
+Function Standards:
+
+Use Fish shell syntax
+Include proper error handling and safety checks
+Add helpful feedback messages with emojis
+Follow the naming pattern: git-action for git functions, or function-name for general functions
+Include input validation with clear usage examples
+Add confirmation prompts for destructive operations
+Use consistent emoji patterns (✅ for success, ❌ for errors, 💡 for hints, etc.)
+
+Safety Features I Want:
+
+Check if we're in appropriate context (git repo, valid directory, etc.)
+Prevent accidental data loss
+Provide clear error messages that tell me what went wrong AND how to fix it
+Add confirmation prompts for dangerous operations
+
+Code Style:
+
+Use helper functions for common checks (like _git_check)
+Keep functions focused on one task
+Use meaningful variable names
+Include comments for complex logic
+Follow the existing patterns from my Git Power Pack
+
+What I Need From You
+Please create a Fish function that:
+
+Follows my existing patterns - Use the same style, error handling, and feedback as my Git functions
+Includes proper documentation - Show usage examples and explain when to use it
+Has safety features - Appropriate checks and confirmations
+Provides clear feedback - Success/error messages with emojis
+Integrates well - Can be added to my existing function collection
+
+Function Request
+What I want the function to do:
+[Describe your specific need here]
+Function name I prefer:
+[Suggest a name, or say "you choose"]
+Any specific requirements:
+[Any special behavior, parameters, or constraints]
+Example usage:
+[How you imagine using it]

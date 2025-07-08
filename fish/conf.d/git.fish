@@ -27,6 +27,7 @@ function gf
     echo "🔹 git-undo-commit          → Undo your last commit, but keep the changes. Use if you committed too soon or with a wrong message."
     echo "🔹 git-undo-all             → DANGER: Reset everything to last commit. Use only if you want to throw away ALL local changes."
     echo "🔹 git-restore              → Discard all unstaged changes. Use if you want to revert your working directory to last commit."
+    echo "🔹 git-nuke                 → Delete the current branch. Use if you want to start over from last commit."
     echo ""
     echo "📦 STASH MANAGEMENT (Pause your work):"
     echo "🔹 git-stash '<msg>'        → Save your changes temporarily. Use if you need to switch branches but aren’t ready to commit."
@@ -428,6 +429,29 @@ function git-stash-clear
     if test "$confirm" = "y" -o "$confirm" = "Y"
         git stash clear
         echo "✅ All stashes cleared"
+    else
+        echo "❌ Cancelled"
+    end
+end
+
+# ==== git-nuke → ব্রাঞ্চ মুছে ফেলে =====
+function git-nuke
+    set current_branch (_git_current_branch)
+
+    if test "$current_branch" = "main"
+        echo "❌ Can't delete main branch!"
+        return 1
+    end
+
+    echo "⚠️  This will DELETE the current branch: $current_branch"
+    echo "❓ Are you sure? (y/N)"
+    read -l confirm
+
+    if test "$confirm" = "y" -o "$confirm" = "Y"
+        git checkout main
+        git branch -D $current_branch
+        git push origin --delete $current_branch 2>/dev/null
+        echo "💥 Nuked branch: $current_branch"
     else
         echo "❌ Cancelled"
     end
