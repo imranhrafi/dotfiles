@@ -219,9 +219,4 @@ alias regen-cursor-minimal="sudo rm -f /etc/machine-id /var/lib/dbus/machine-id;
 
 
 
-# ===== Git =====
-alias gac="git add . && git commit -m"
-alias gcap="git add . && git commit -m && git push"
-alias guncommit="git reset --soft HEAD~1"
-alias gl="git log --oneline --graph --decorate"
 
