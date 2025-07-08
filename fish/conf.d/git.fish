@@ -5,9 +5,6 @@
 # 📘 Git Help Menu - Complete Cheat Sheet
 function gf
     echo ""
-    echo "📘 COMPLETE GIT WORKFLOW CHEAT SHEET (PHASE-ORDERED)"
-    echo "════════════════════════════════════════════════════"
-    echo ""
     echo "🌱 1. START WORKING"
     echo "────────────────────────────────────────────"
     echo "🔹 git-new <name>        → Create & switch to new branch (e.g. git-new feat/auth)"
