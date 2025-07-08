@@ -28,6 +28,7 @@ alias downloads="cd ~/Downloads"
 alias desk="cd ~/Desktop"
 alias docs="cd ~/Documents"
 alias config="cd ~/.config"
+alias dotfiles="cd /mnt/Projects/dotfiles"
 
 # ===== YAZI FILE MANAGER =====
 alias y="yazi"
@@ -141,7 +142,7 @@ alias trpcgen="npx @trpc/cli generate"
 
 # ===== SHADCN =====
 alias shadcn="pnpm dlx shadcn@latest add"
-alias bunshadcn="pnpm dlx shadcn@latest add"
+alias shad:base="pnpm dlx shadcn@latest add button input label form card dialog alert-dialog sonner tooltip select tabs accordion switch dropdown-menu textarea table avatar badge progress skeleton popover sheet"
 
 # ===== TAILWIND =====
 alias tw="pnpm dlx tailwindcss"
@@ -215,3 +216,12 @@ alias bashrc="nvim ~/.bashrc"
 alias cursor-cache-remove="rm -rf ~/.config/Cursor ~/.cache/Cursor"
 alias regen-cursor="rm -rf ~/.config/Cursor ~/.cache/Cursor; sudo rm /etc/machine-id; and sudo systemd-machine-id-setup"
 alias regen-cursor-minimal="sudo rm -f /etc/machine-id /var/lib/dbus/machine-id; sudo systemd-machine-id-setup; rm -rf ~/.config/Cursor/User/globalStorage"
+
+
+
+# ===== Git =====
+alias gac="git add . && git commit -m"
+alias gcap="git add . && git commit -m && git push"
+alias guncommit="git reset --soft HEAD~1"
+alias gl="git log --oneline --graph --decorate"
+

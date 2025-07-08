@@ -34,6 +34,47 @@ function setup-project
     end
 end
 
+function create-convex
+    if test (count $argv) -eq 0
+        echo "Usage: create-convex <project-name> [shadcn-components...]"
+        return 1
+    end
+
+    set project $argv[1]
+    set components (string join " " (string sub -s 2 $argv)) # All args after project name
+
+    echo "🔧 Creating Convex project with Next.js + Convex Auth..."
+
+    # Create project with Convex, Next.js, and Convex Auth (auto confirm prompts)
+    npm create convex@latest $project -- \
+        --use-pnpm \
+        --client nextjs-app-router \
+        --auth convex
+
+    if test $status -ne 0
+        echo "❌ Convex project creation failed."
+        return 1
+    end
+
+    cd $project
+
+    echo "🎨 Setting up shadcn/ui..."
+
+    # Install shadcn/ui and prefill init config
+    pnpm dlx shadcn-ui@latest init --yes --style new-york --tailwind-config tailwind.config.ts --tsconfig tsconfig.json --components-json components.json --base-color neutral
+
+    # Add components (user-defined or default)
+    if test -n "$components"
+        pnpm dlx shadcn-ui@latest add $components
+    else
+        pnpm dlx shadcn-ui@latest add button card input label textarea sheet
+    end
+
+    echo "✅ Convex + Next.js project '$project' created and shadcn/ui components added!"
+    echo "👉 cd $project && pnpm run dev"
+end
+
+
 # Kill process on specific port
 function killport
     if test (count $argv) -eq 0
