@@ -8,5 +8,5 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
-set -x GOOGLE_API_KEY "AIzaSyDVf872l488-oFuYvfsuyTTR5XH8qj2ZYc"
+
 
