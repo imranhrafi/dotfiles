@@ -69,4 +69,8 @@ create_symlink "$DOTFILES_DIR/wezterm" "$HOME/.config/wezterm"
 echo "Setting up Fish configuration..."
 create_symlink "$DOTFILES_DIR/fish" "$HOME/.config/fish"
 
+# Zsh configuration
+echo "Setting up Zsh configuration..."
+create_symlink "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
+
 echo "Dotfiles setup complete!"
