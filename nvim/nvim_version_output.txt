@@ -1,0 +1,7 @@
+
+
+
+NVIM v0.11.2
+Build type: RelWithDebInfo
+LuaJIT 2.1.1748459687
+Run ":verbose version" for more info
