@@ -182,7 +182,7 @@ alias grep="ugrep --color=auto"
 alias egrep="ugrep -E --color=auto"
 alias fgrep="ugrep -F --color=auto"
 alias json="python -m json.tool"
-alias urlencode="python -c \"import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1]))\""
+alias urlencode="python -c 'import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1]))'"
 
 # ===== DEVELOPMENT =====
 alias vim="nvim"
@@ -211,4 +211,4 @@ alias bashrc="nvim ~/.bashrc"
 # ===== CURSOR AI EDITOR =====
 alias cursor-cache-remove="rm -rf ~/.config/Cursor ~/.cache/Cursor"
 alias regen-cursor="rm -rf ~/.config/Cursor ~/.cache/Cursor; sudo rm /etc/machine-id && sudo systemd-machine-id-setup"
-alias regen-cursor-minimal="sudo rm -f /etc/machine-id /var/lib/dbus/machine-id; sudo systemd-machine-id-setup; rm -rf ~/.config/Cursor/User/globalStorage"}
+alias regen-cursor-minimal="sudo rm -f /etc/machine-id /var/lib/dbus/machine-id; sudo systemd-machine-id-setup; rm -rf ~/.config/Cursor/User/globalStorage"

@@ -1,4 +1,3 @@
-
 function create-convex
     if test (count $argv) -eq 0
         echo "Usage: create-convex <project-name> [shadcn-components...]"
@@ -33,10 +32,11 @@ function create-convex
         pnpm dlx shadcn@latest add $components
     else
         echo "📦 Adding default components..."
-        pnpm dlx shadcn@latest add button input label form card dialog alert-dialog sonner tooltip select tabs accordion switch dropdown-menu textarea table avatar badge progress skeleton popover sheet
+        pnpm dlx shadcn@latest add --all
     end
 
     echo "🔧 Initializing Git repository..."
+    pnpm install convex-ents convex-helpers @convex-dev/auth @auth/core
     git init
     git add .
     git commit -m "Initial commit: Convex + Next.js + shadcn/ui setup"
@@ -45,8 +45,6 @@ function create-convex
     echo "✅ Project '$project' ready! Starting development server..."
     pnpm dev
 end
-
-
 
 # Clean all development files
 function clean-dev
@@ -70,8 +68,6 @@ function clean-dev
     end
 end
 
-
-
 # Enhanced reload function
 function reload
     echo "🔄 Reloading Fish shell (full session)..."
@@ -85,5 +81,45 @@ function fish-history
     else
         builtin history --show-time='%F %T ' | grep -i $argv[1]
     end
+end
+
+function resetcursor --description "Advanced Cursor reset to avoid device fingerprinting"
+    echo "🔄 Starting advanced Cursor reset..."
+
+    # Kill all cursor processes
+    killall cursor &>/dev/null
+    pkill -f cursor &>/dev/null
+    sleep 2
+
+    # Remove machine ID and regenerate
+    sudo rm -f /etc/machine-id
+    sudo systemd-machine-id-setup
+
+    # Remove all Cursor user data
+    rm -rf ~/.config/Cursor ~/.cache/Cursor ~/.local/share/Cursor ~/.local/state/Cursor
+
+    # Remove any desktop entries
+    rm -f ~/.local/share/applications/cursor*.desktop &>/dev/null
+
+    # Clear system logs that might contain Cursor activity
+    sudo journalctl --vacuum-time=1s &>/dev/null
+
+    # Optional: Generate new MAC address (requires network restart)
+    echo "🔧 Consider changing MAC address:"
+    echo "   sudo macchanger -r $(ip route | grep default | awk '{print $5}' | head -1)"
+
+    # Optional: Clear browser-like data that Cursor might store
+    rm -rf ~/.config/Cursor* ~/.cache/Cursor* ~/.local/share/Cursor* &>/dev/null
+
+    # Clear any potential temp files
+    find /tmp -name "*cursor*" -type f -delete &>/dev/null
+    find /var/tmp -name "*cursor*" -type f -delete &>/dev/null
+
+    echo "✅ Advanced Cursor reset complete!"
+    echo "🔄 Reboot system and consider:"
+    echo "   - Use different network/VPN"
+    echo "   - Change MAC address"
+    echo "   - Use different timezone"
+    echo "   - Different screen resolution"
 end
 
