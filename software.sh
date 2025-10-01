@@ -77,3 +77,7 @@ curl -fsSL https://bun.sh/install | bash
 check_success "Failed to install Bun."
 
 echo "Software installation complete!"
+
+# Install LazyGit for Neovim Git TUI
+sudo pacman -S --noconfirm lazygit
+

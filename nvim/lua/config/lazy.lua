@@ -30,11 +30,17 @@ require("lazy").setup({
       dependencies = {
         "nvim-lua/plenary.nvim",
       },
+      keys = {
+        { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+      },
     },
     -- Override nvim-tree.lua to auto-close on file selection
     {
       "nvim-tree/nvim-tree.lua",
       opts = {
+        filters = {
+          dotfiles = false,
+        },
         actions = {
           open_file = {
             quit_on_open = true,

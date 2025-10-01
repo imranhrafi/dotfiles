@@ -8,7 +8,6 @@ return {
         "dist/",
         ".vercel/",
         "%.lock",
-        ".env*",
         "lazy-lock.json",
       },
     },
