@@ -11,22 +11,21 @@ DOTFILES_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # echo "Updating system packages to avoid conflicts..."
 # sudo pacman -Syu --noconfirm
 
-
 # # Run software installation script
 # echo "Running software installation script..."
 # "$DOTFILES_DIR/software.sh"
 
 # Function to create symlinks with error handling
 create_symlink() {
-    local target=$1
-    local link_name=$2
-    rm -rf "$link_name"
-    ln -sT "$target" "$link_name"
-    if [ $? -eq 0 ]; then
-        echo "Linked $link_name -> $target"
-    else
-        echo "Failed to link $link_name"
-    fi
+  local target=$1
+  local link_name=$2
+  rm -rf "$link_name"
+  ln -sT "$target" "$link_name"
+  if [ $? -eq 0 ]; then
+    echo "Linked $link_name -> $target"
+  else
+    echo "Failed to link $link_name"
+  fi
 }
 
 # Alacritty configuration
@@ -72,5 +71,9 @@ create_symlink "$DOTFILES_DIR/fish" "$HOME/.config/fish"
 # Zsh configuration
 echo "Setting up Zsh configuration..."
 create_symlink "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
+
+# Espanso configuration
+echo "Setting up Espanso configuration..."
+create_symlink "$DOTFILES_DIR/espanso" "$HOME/.config/espanso"
 
 echo "Dotfiles setup complete!"

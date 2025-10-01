@@ -1,0 +1,6 @@
+matches:
+  - trigger: ":nextjs"
+    replace: "Next.js 15 App Router, Convex DB"
+
+  - trigger: ":nextconvex"
+    replace: "Please read the relevant docs: @Convex, @Convex Ents, @Convex-auth, @Nextjs15 to gain up-to-date knowledge and utilize them properly. This will make the application more efficient and production-ready."

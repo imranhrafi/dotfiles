@@ -41,7 +41,7 @@ abbr -a ... "cd ../.."
 abbr -a .... "cd ../../.."
 abbr -a ..... "cd ../../../.."
 abbr -a ...... "cd ../../../../.."
-abbr -a c "clear"
+abbr -a c clear
 abbr -a data "cd /mnt/Data/dev-projects"
 abbr -a project "cd /mnt/Projects"
 abbr -a proj "cd /mnt/Projects"
@@ -52,7 +52,7 @@ abbr -a config "cd ~/.config"
 abbr -a dotfiles "cd /mnt/Projects/dotfiles"
 
 # ===== YAZI FILE MANAGER =====
-abbr -a y "yazi"
+abbr -a y yazi
 abbr -a yp "yazi .."
 abbr -a yd "yazi ~/Downloads"
 abbr -a ydox "yazi ~/Documents"
@@ -74,7 +74,7 @@ abbr -a pr "sudo pacman -Rs"
 abbr -a pq "pacman -Q | wc -l"
 abbr -a pqs "pacman -Qs"
 abbr -a pi "pacman -Si"
-abbr -a upd "/usr/bin/garuda-update"
+abbr -a upd /usr/bin/garuda-update
 abbr -a fixpacman "sudo rm /var/lib/pacman/db.lck"
 abbr -a grubup "sudo update-grub"
 abbr -a rmpkg "sudo pacman -Rdd"
@@ -90,8 +90,8 @@ abbr -a mirrord "sudo reflector --latest 50 --number 20 --sort delay --save /etc
 abbr -a mirrors "sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
 
 # ===== DOCKER =====
-abbr -a dk "docker"
-abbr -a dkc "docker-compose"
+abbr -a dk docker
+abbr -a dkc docker-compose
 abbr -a dkup "docker-compose up -d"
 abbr -a dkdown "docker-compose down"
 abbr -a dklogs "docker-compose logs -f"
@@ -131,7 +131,7 @@ abbr -a pformat "npx prisma format"
 abbr -a pinit "npx prisma init"
 
 # ===== PNPM =====
-abbr -a pn "pnpm"
+abbr -a pn pnpm
 abbr -a px "pnpm dlx"
 abbr -a pd "pnpm run dev"
 abbr -a pi "pnpm install" # Note: 'pi' conflicts with 'pacman -Si'. Consider renaming one.
@@ -148,7 +148,7 @@ abbr -a pn-update "pnpm update --latest"
 abbr -a pndev "pnpm run dev"
 abbr -a pnbuild "pnpm run build"
 abbr -a outdated "pnpm outdated"
-abbr -a npm "pnpm"
+abbr -a npm pnpm
 abbr -a npx "pnpm dlx"
 
 # ===== NEXT.JS =====
@@ -191,14 +191,14 @@ abbr -a pingg "ping google.com"
 abbr -a netstat "ss -tuln"
 abbr -a speedtest "curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
 abbr -a mem "free -h"
-abbr -a cpu "lscpu"
-abbr -a temp "sensors"
-abbr -a disk "lsblk"
+abbr -a cpu lscpu
+abbr -a temp sensors
+abbr -a disk lsblk
 abbr -a procs "ps aux | head -20"
 abbr -a dfh "df -h"
 abbr -a reboot "sudo systemctl reboot"
 abbr -a poweroff "sudo systemctl poweroff"
-abbr -a top "htop"
+abbr -a top htop
 abbr -a weather "curl wttr.in"
 
 # ===== PROCESS MANAGEMENT =====
@@ -215,16 +215,16 @@ abbr -a json "python -m json.tool"
 abbr -a urlencode "python -c \"import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1]))\""
 
 # ===== DEVELOPMENT =====
-abbr -a vim "nvim"
+abbr -a vim nvim
 abbr -a serve "python -m http.server 8000"
 abbr -a nr "npm run"
-abbr -a python "python3"
+abbr -a python python3
 abbr -a ping "ping -c 5"
-
+abbr -a cnd "npx convex dev --tail-logs"
 # ===== MISCELLANEOUS =====
 abbr -a wget "wget -c"
 abbr -a tb "nc termbin.com 9999"
-abbr -a please "sudo"
+abbr -a please sudo
 abbr -a apt "man pacman"
 abbr -a apt-get "man pacman"
 abbr -a helpme "echo 'To print basic information about a command use tldr <command>'"
@@ -243,10 +243,8 @@ abbr -a bashrc "nvim ~/.bashrc"
 abbr -a cursor-cache-remove "rm -rf ~/.config/Cursor ~/.cache/Cursor"
 # Note: The following aliases use `and` which is Fish-specific syntax.
 # They might not work perfectly within `abbr`. Using `alias` is recommended.
+alias regen-windsurf "rm -rf ~/.config/Windsurf ~/.cache/Windsurf; sudo rm /etc/machine-id; and sudo systemd-machine-id-setup"
 alias regen-cursor "rm -rf ~/.config/Cursor ~/.cache/Cursor; sudo rm /etc/machine-id; and sudo systemd-machine-id-setup"
-alias regen-cursor-minimal "sudo rm -f /etc/machine-id /var/lib/dbus/machine-id; sudo systemd-machine-id-setup; rm -rf ~/.config/Cursor/User/globalStorage"
-
-
 # ===== GIT =====
 # (These were already using `abbr -a`)
 abbr -a gac 'git add . && git commit -m'

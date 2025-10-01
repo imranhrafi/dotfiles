@@ -5,15 +5,15 @@ DOTFILES_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 # Function to create symlinks with error handling
 create_symlink() {
-    local target=$1
-    local link_name=$2
-    rm -rf "$link_name"
-    ln -sT "$target" "$link_name"
-    if [ $? -eq 0 ]; then
-        echo "Linked $link_name -> $target"
-    else
-        echo "Failed to link $link_name"
-    fi
+  local target=$1
+  local link_name=$2
+  rm -rf "$link_name"
+  ln -sT "$target" "$link_name"
+  if [ $? -eq 0 ]; then
+    echo "Linked $link_name -> $target"
+  else
+    echo "Failed to link $link_name"
+  fi
 }
 
 # Ensure local bin directory exists
@@ -48,4 +48,7 @@ create_symlink "$DOTFILES_DIR/wezterm" "$HOME/.config/wezterm"
 echo "Setting up Fish configuration..."
 create_symlink "$DOTFILES_DIR/fish" "$HOME/.config/fish"
 
+echo "Setting up Espanso configuration..."
+create_symlink "$DOTFILES_DIR/espanso" "$HOME/.config/espanso"
 echo "Symlink setup complete!"
+

@@ -19,7 +19,10 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
-    { import = "plugins" },
+    { import = "plugins.ui" },
+    { import = "plugins.lsp" },
+    { import = "plugins.tools" },
+    { import = "plugins.lang" },
     -- Add lazygit.nvim for Git TUI
     {
       "kdheepak/lazygit.nvim",
@@ -32,8 +35,10 @@ require("lazy").setup({
     {
       "nvim-tree/nvim-tree.lua",
       opts = {
-        view = {
-          auto_close = true,
+        actions = {
+          open_file = {
+            quit_on_open = true,
+          },
         },
       },
     },
@@ -46,6 +51,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.ui.mini-indentscope" },
+    { import = "lazyvim.plugins.extras.dap.core" },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
