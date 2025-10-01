@@ -1,79 +1,92 @@
-#!/usr/bin/env bash
+#!/bin/bash
+#
+# install.sh
+#
+# This script orchestrates the entire setup for the dotfiles repository.
+# It installs software, creates symlinks using stow, and sets permissions.
 
-# Get directory containing dotfiles
-DOTFILES_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-
-# # Refresh mirrors for faster and more reliable downloads
-# echo "Updating package mirrors for optimized download speeds..."
-# sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
-
-# # Full system update
-# echo "Updating system packages to avoid conflicts..."
-# sudo pacman -Syu --noconfirm
-
-# # Run software installation script
-# echo "Running software installation script..."
-# "$DOTFILES_DIR/software.sh"
-
-# Function to create symlinks with error handling
-create_symlink() {
-  local target=$1
-  local link_name=$2
-  rm -rf "$link_name"
-  ln -sT "$target" "$link_name"
-  if [ $? -eq 0 ]; then
-    echo "Linked $link_name -> $target"
-  else
-    echo "Failed to link $link_name"
-  fi
+# --- Helper Functions ---
+print_info() {
+    echo -e "\e[34m[INFO]\e[0m $1"
 }
 
-# Alacritty configuration
-echo "Setting up Alacritty configuration..."
-create_symlink "$DOTFILES_DIR/alacritty" "$HOME/.config/alacritty"
+print_success() {
+    echo -e "\e[32m[SUCCESS]\e[0m $1"
+}
 
-# Tmux configuration
-echo "Setting up Tmux configuration..."
-create_symlink "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
+print_error() {
+    echo -e "\e[31m[ERROR]\e[0m $1"
+}
 
-# Ensure local bin directory exists
-echo "Ensuring local bin directory exists..."
-mkdir -p "$HOME/.local/bin"
+# --- Set Script Directory ---
+DOTFILES_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+cd "$DOTFILES_DIR" || exit
 
-# Script link
-echo "Linking custom script to ~/.local/bin..."
-create_symlink "$DOTFILES_DIR/scripts/t" "$HOME/.local/bin/t"
+# --- Step 1: Set Permissions ---
+print_info "Setting executable permissions for scripts..."
+chmod +x software.sh
+chmod +x scripts/t
+chmod +x new-nextjs.sh
+print_success "Script permissions set."
 
-# Neovim configuration
-echo "Setting up Neovim configuration..."
-create_symlink "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
+# --- Step 2: Install Software ---
+print_info "Running the software installation script..."
+if ./software.sh; then
+    print_success "Software installation completed."
+else
+    print_error "Software installation failed. Please check the output above."
+    exit 1
+fi
 
-# Hypr configuration
-echo "Setting up Hypr configuration..."
-create_symlink "$DOTFILES_DIR/hypr" "$HOME/.config/hypr"
+# --- Step 3: Create Symlinks with Stow ---
+# Stow works by symlinking files/folders from a package directory (e.g., 'nvim')
+# into the parent directory of the stow directory (in this case, $HOME).
+# We specify the target directory as $HOME.
+print_info "Creating symlinks using GNU Stow..."
 
-# Kitty configuration
-echo "Setting up Kitty configuration..."
-create_symlink "$DOTFILES_DIR/kitty" "$HOME/.config/kitty"
+# List of packages to stow
+# Note: 'zsh' is handled separately as it links to the home dir, not .config
+STOW_PACKAGES=(
+    alacritty
+    espanso
+    fish
+    kitty
+    nvim
+    tmux
+    wezterm
+    yazi
+    # Add any new config directories here
+)
 
-# Yazi configuration
-echo "Setting up Yazi configuration..."
-create_symlink "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
+for package in "${STOW_PACKAGES[@]}"; do
+    print_info "Stowing '$package'..."
+    if stow --target="$HOME" --restow "$package"; then
+        print_success "'$package' stowed successfully."
+    else
+        print_error "Failed to stow '$package'. Please check for conflicts."
+    fi
+done
 
-# Wezterm configuration
-echo "Setting up Wezterm configuration..."
-create_symlink "$DOTFILES_DIR/wezterm" "$HOME/.config/wezterm"
-
-# Fish configuration
-echo "Setting up Fish configuration..."
-create_symlink "$DOTFILES_DIR/fish" "$HOME/.config/fish"
+# --- Step 4: Handle Special Cases ---
+# Some files need to be linked directly to the home directory, not .config
+print_info "Handling special symlink cases..."
 
 # Zsh configuration
-echo "Setting up Zsh configuration..."
-create_symlink "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
+if ln -sf "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"; then
+    print_success "Linked .zshrc successfully."
+else
+    print_error "Failed to link .zshrc."
+fi
 
-# Espanso configuration
-echo "Setting up Espanso configuration..."
-create_symlink "$DOTFILES_DIR/espanso" "$HOME/.config/espanso"
+# Ensure local bin directory exists and link scripts
+mkdir -p "$HOME/.local/bin"
+if ln -sf "$DOTFILES_DIR/scripts/t" "$HOME/.local/bin/t"; then
+    print_success "Linked 't' script to ~/.local/bin."
+else
+    print_error "Failed to link 't' script."
+fi
 
-echo "Dotfiles setup complete!"
+
+# --- Finalization ---
+print_success "Dotfiles setup is complete!"
+print_info "Please restart your shell or source your shell's configuration file (e.g., 'source ~/.zshrc') for changes to take effect."

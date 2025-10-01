@@ -38,6 +38,9 @@ require("lazy").setup({
     {
       "nvim-tree/nvim-tree.lua",
       opts = {
+        git = {
+          ignore = false,
+        },
         filters = {
           dotfiles = false,
         },
