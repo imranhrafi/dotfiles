@@ -35,6 +35,8 @@ TERM = "xterm-256color"
 
 [font]
 size = 12
+# Enable font ligatures for Fira Code
+features = ["liga", "calt"]
 
 [font.bold]
 family = "FiraCode Nerd Font Mono"
@@ -47,6 +49,7 @@ family = "FiraCode Nerd Font Mono"
 
 [font.normal]
 family = "FiraCode Nerd Font Mono"
+style = "Regular" # Required for ligatures to work reliably
 
 [[keyboard.bindings]]
 action = "Paste"
@@ -83,11 +86,6 @@ action = "DecreaseFontSize"
 key = "Minus"
 mods = "Control"
 
-[[keyboard.bindings]]
-action = "DecreaseFontSize"
-key = "Minus"
-mods = "Control"
-
 [mouse]
 hide_when_typing = true
 
@@ -102,7 +100,9 @@ program = "/usr/bin/fish"
 decorations = "full"
 decorations_theme_variant = "Dark"
 dynamic_padding = true
-opacity = 0.6
+# Consider setting this in your Window Manager for better performance
+# If you experience no lag, 0.8 or 0.9 is often a good compromise.
+opacity = 0.8
 title = "Alacritty"
 
 [window.class]
