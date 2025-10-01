@@ -1,83 +1,74 @@
 #!/bin/bash
+#
+# software.sh
+#
+# This script installs all the necessary software for the dotfiles configuration.
+# It is intended for Arch Linux based systems (like Garuda).
 
-# Define function to check for errors
-check_success() {
-  if [ $? -ne 0 ]; then
-    echo "Error occurred: $1"
-    exit 1
-  fi
+# --- Helper Functions ---
+print_info() {
+    echo -e "\e[34m[INFO]\e[0m $1"
 }
 
-# Function to install 'yay' if not already installed
-install_yay() {
-  echo "Checking for 'yay' (AUR helper)..."
-  if ! command -v yay &>/dev/null; then
-    echo "'yay' not found. Installing..."
-
-    # Update package lists and install necessary packages
-    sudo pacman -Sy --noconfirm
-    check_success "Failed to update package lists."
-
-    sudo pacman -S --needed --noconfirm base-devel git
-    check_success "Failed to install base-devel and git."
-
-    # Clone and install yay
-    git clone https://aur.archlinux.org/yay.git
-    check_success "Failed to clone yay repository."
-
-    cd yay || {
-      echo "Failed to enter yay directory."
-      exit 1
-    }
-    makepkg -si --noconfirm
-    check_success "Failed to build and install yay."
-
-    cd .. && rm -rf yay
-    echo "yay installed successfully."
-  else
-    echo "'yay' is already installed."
-  fi
+print_success() {
+    echo -e "\e[32m[SUCCESS]\e[0m $1"
 }
 
-# Install yay if necessary
-install_yay
+print_error() {
+    echo -e "\e[31m[ERROR]\e[0m $1"
+}
 
-# Install packages from official repositories
-echo "Installing packages from official repositories..."
+# --- Update System ---
+print_info "Updating system packages..."
+sudo pacman -Syu --noconfirm || { print_error "Failed to update system packages."; exit 1; }
+
+# --- Core Applications & Terminals ---
+print_info "Installing core applications and terminal emulators..."
 sudo pacman -S --noconfirm --needed \
-  alacritty \
-  wezterm \
-  fish \
-  neovim \
-  tmux \
-  fastfetch \
-  git \
-  vlc \
-  python \
-  postgresql \
-  nodejs \
-  npm \
-  unzip \
-  check_success "Failed to install official repository packages."
+    alacritty \
+    kitty \
+    wezterm \
+    tmux \
+    neovim \
+    espanso-wayland || { print_error "Failed to install core applications."; exit 1; }
 
-# Install packages from AUR using yay
-echo "Installing AUR packages..."
-yay -S --noconfirm --needed \
-  nerd-fonts-noto-sans-mono \
-  postman \
-  google-chrome \
-  visual-studio-code-bin \
-  eza
+# --- Shells ---
+print_info "Installing shells..."
+sudo pacman -S --noconfirm --needed \
+    fish \
+    zsh || { print_error "Failed to install shells."; exit 1; }
 
-check_success "Failed to install AUR packages."
+# --- CLI Tools & Utilities ---
+print_info "Installing essential CLI tools and utilities..."
+sudo pacman -S --noconfirm --needed \
+    git \
+    stow \
+    lazygit \
+    eza \
+    bat \
+    fd \
+    ripgrep \
+    fzf \
+    zoxide \
+    starship \
+    unzip || { print_error "Failed to install CLI tools."; exit 1; }
 
-# Install Bun
-echo "Installing Bun..."
-curl -fsSL https://bun.sh/install | bash
-check_success "Failed to install Bun."
+# --- Yazi (File Manager) Dependencies ---
+print_info "Installing dependencies for Yazi file manager..."
+sudo pacman -S --noconfirm --needed \
+    ffmpegthumbnailer \
+    unarchiver \
+    poppler || { print_error "Failed to install Yazi dependencies."; exit 1; }
 
-echo "Software installation complete!"
+# --- Development Environment ---
+print_info "Installing development environment tools..."
+sudo pacman -S --noconfirm --needed \
+    nodejs-lts-gallium \
+    npm \
+    bun \
+    deno \
+    stylua || { print_error "Failed to install development tools."; exit 1; }
 
-# Install LazyGit for Neovim Git TUI
-sudo pacman -S --noconfirm lazygit
+print_success "All software has been installed successfully!"
 
+print_info "Please restart your terminal or source your shell configuration for all changes to take effect."
