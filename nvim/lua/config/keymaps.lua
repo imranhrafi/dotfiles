@@ -8,3 +8,6 @@ vim.keymap.set("n", "<leader>Q", ":qa<CR>", { desc = "Quit all windows" })
 vim.keymap.set("n", "<C-e>", "<C-w>h", { desc = "Focus file explorer" })
 vim.keymap.set("n", "gt", "<cmd>tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "gT", "<cmd>tabprevious<CR>", { desc = "Previous tab" })
+
+-- Override default Telescope grep to ensure it's live_grep
+vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "Grep (Text Search)" })
