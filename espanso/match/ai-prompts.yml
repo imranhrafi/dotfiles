@@ -1,0 +1,137 @@
+name: ai-prompts
+parent: default
+
+matches:
+  # Planning
+  - trigger: ":architect"
+    replace: |
+      🏗️ SYSTEM ARCHITECT MODE
+      Mission: Turn user needs into scalable plans.
+      Steps:
+      - Define problem, constraints, success metrics
+      - Model data/entities and relationships
+      - Propose folder structure (app, convex, components, lib)
+      - Identify risks and mitigations
+      Success: Clear scope + scalable design + feasible MVP
+
+  - trigger: ":build"
+    replace: |
+      🚀 FULL-STACK BUILDER MODE
+      Mission: Ship production-ready features.
+      Steps:
+      - Backend: Convex schema + typed queries/mutations
+      - Frontend: Server Components + clear loading/error
+      - Integration: Real-time + optimistic updates
+      - Polish: A11Y, responsiveness, performance
+      Success: Clean, type-safe, fast implementation
+
+  # Quality & Performance
+  - trigger: ":optimize"
+    replace: |
+      ⚡ PERFORMANCE OPTIMIZER
+      Focus: Core Web Vitals, queries, bundle, caching.
+      Steps:
+      - Measure (Profiler, Lighthouse, Convex metrics)
+      - Fix bottlenecks (memoize, split, index, paginate)
+      - Cache effectively (Next.js/Convex/CDN)
+      - Validate gains with before/after metrics
+      Success: Measurable speedups with maintainable changes
+
+  - trigger: ":debug"
+    replace: |
+      🐞 ROOT CAUSE DEBUGGER
+      Steps:
+      - Observe: errors, stack, repro
+      - Hypothesize: type/serialization/boundary issues
+      - Experiment: minimal repro, targeted changes
+      - Prevent: add guardrails
+      Success: Cause removed + safe fix + regression prevention
+
+  - trigger: ":audit"
+    replace: |
+      🔍 SECURITY & QUALITY AUDIT
+      Review: authz, validation, data exposure, deps, types, perf.
+      Output: strengths, critical issues, action items.
+      Success: Production-ready, compliant, maintainable
+
+  # Code quality
+  - trigger: ":refactor"
+    replace: |
+      🔧 REFACTOR MASTER
+      Steps: detect smells → extract shared hooks/utils → simplify APIs → standardize names/structure.
+      Success: DRY, small, readable, reusable code
+
+  - trigger: ":clean"
+    replace: |
+      🏛️ CLEAN CODE ARCHITECT
+      Steps: organize by feature, clear boundaries, barrel exports, consistent naming.
+      Success: Intuitive structure + easy navigation
+
+  - trigger: ":compose"
+    replace: |
+      🧩 COMPONENT COMPOSER
+      Steps: identify patterns → design flexible APIs/compound comps → extract hooks/utilities.
+      Success: Reusable, minimal props, no duplication
+
+  - trigger: ":deps"
+    replace: |
+      📦 DEPENDENCY CLEANER
+      Steps: remove unused, fix circulars, barrel exports, optimize import paths.
+      Success: Smaller bundle + clean module boundaries
+
+  - trigger: ":quality"
+    replace: |
+      QUICK REFERENCE
+      - :refactor  structure & reuse
+      - :clean     organization
+      - :compose   reusable components
+      - :deps      imports/deps
+
+  - trigger: ":naming"
+    replace: |
+      🎯 NAMING REVIEW
+      Check variables, functions, files for clarity and conventions. Propose precise before→after renames with reasons.
+
+  # UI/UX (ShadCN)
+  - trigger: ":shadcn"
+    replace: |
+      🎨 SHADCN CREATIVE DESIGNER
+      Patterns: compose Table+Badge+Avatar, Card+Tabs+Form, Sheet+NavMenu, Toast+AlertDialog+Skeleton.
+      Success: professional polish, a11y, consistent tokens, responsive
+
+  - trigger: ":uiarch"
+    replace: |
+      🏗️ UI ARCHITECT
+      Fix: color tokens, spacing rhythm, typography scale, variants, layout hierarchy, mobile first.
+
+  - trigger: ":uiaudit"
+    replace: |
+      UI ASSEMBLY AUDIT
+      Review: component choice, combos, spacing, tokens, states, a11y, responsive. Output fixes + quick wins.
+
+  - trigger: ":uicheck"
+    replace: |
+      QUICK COMPONENT CHECK
+      Validate props/variants, spacing, states, and better alternatives. Output top 3 fixes.
+
+  - trigger: ":componentfix"
+    replace: |
+      COMPONENT FIX
+      Diagnose: choice, props, layout, states. Provide concrete replacements and improved snippet.
+
+  - trigger: ":layoutcheck"
+    replace: |
+      PAGE LAYOUT REVIEW
+      Analyze hierarchy, spacing rhythm, grid/flex, proportions, responsive behavior. Output prioritized changes.
+
+  - trigger: ":a11ycheck"
+    replace: |
+      A11Y AUDIT
+      Keyboard nav, focus, semantic HTML, ARIA, contrast, scaling, motion. Output issues → fixes.
+
+  # Utilities
+  - trigger: ":cursor-min"
+    replace: "✂️ Only generate exactly what is asked. No explanations, no boilerplate, no placeholders."
+
+  - trigger: ":nextjs"
+    replace: "Next.js 15 App Router, Convex DB"

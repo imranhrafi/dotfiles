@@ -246,9 +246,9 @@ abbr -a cursor-cache-remove "rm -rf ~/.config/Cursor ~/.cache/Cursor"
 alias regen-windsurf "rm -rf ~/.config/Windsurf ~/.cache/Windsurf; sudo rm /etc/machine-id; and sudo systemd-machine-id-setup"
 alias regen-cursor "rm -rf ~/.config/Cursor ~/.cache/Cursor; sudo rm /etc/machine-id; and sudo systemd-machine-id-setup"
 # ===== GIT =====
-# (These were already using `abbr -a`)
 abbr -a gac 'git add . && git commit -m'
 abbr -a gacp 'git add . && git commit -m && git push'
 abbr -a git-new 'git checkout -b'
 abbr -a gcamend 'git commit --amend -m'
 abbr -a gll 'git log --graph --oneline --all'
+abbr -a gss 'git status'

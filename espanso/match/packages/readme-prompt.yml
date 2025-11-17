@@ -1,0 +1,58 @@
+name: readme-prompts
+parent: default
+
+matches:
+  - trigger: ":readme"
+    replace: |
+      You are updating a README.md for an existing project. Produce documentation that future LLMs can use to work accurately with this codebase without hallucinating.
+
+      CONTEXT CHECKLIST (read these files first; cite facts only from them):
+      - package.json — dependencies, scripts, metadata
+      - tsconfig.json — TypeScript configuration
+      - File structure — infer apps/packages layout from actual folders
+      - Config files — build tooling, linting, monorepo tools (e.g., turbo.json)
+
+      REQUIRED SECTIONS (include only what exists in the repo):
+
+      1. Project Overview (2-3 sentences)
+         - What the project does (derive from package.json description + folders)
+         - Tech stack (from dependencies + config)
+         - Target environment (browser/server/both)
+
+      2. Quick Start (minimal viable)
+         - Node/npm prerequisites (from engines if present)
+         - Install command(s) only
+         - Single dev run command only
+
+      3. Project Structure (key items only)
+         - apps/: list app names + 1-line purpose
+         - packages/: list package names + 1-line purpose
+         - Top-level: package.json, tsconfig.json, turbo.json — one sentence each
+
+      4. Available Scripts (from package.json)
+         - dev, build, lint, test (and important package-specific scripts only)
+
+      5. Core Technologies
+         - Framework, DB (if any), Auth/Config (if any), Deployment (from config)
+
+      6. Development Notes (if applicable)
+         - Required env vars
+         - DB setup
+         - Special local setup
+
+      OUTPUT RULES (strict):
+      - Evidence-based: do not invent files, commands, or tools; omit unknowns
+      - Skip sections that cannot be supported by repository evidence
+      - Use present tense and technical tone; no marketing language
+      - Commands in fenced code blocks; everything else plain text
+      - If information is ambiguous, state "Unknown" instead of guessing
+
+  - trigger: ":rbc"
+    replace: |
+      READ BEFORE CODE
+      Steps:
+      - Open and read README.md, package.json, tsconfig.json, and repo structure.
+      - Summarize project purpose, stack, and scripts in 5-7 bullet points.
+      - List unknowns or missing info (if any) and assumptions you plan to make.
+      - Confirm understanding with a one-paragraph plan.
+      - Only then propose or write code changes.

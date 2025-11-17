@@ -15,5 +15,28 @@ return {
         "lazy-lock.json",
       },
     },
+    pickers = {
+      find_files = {
+        -- Force the file finder to use `fd` and explicitly exclude common folders.
+        -- This is more reliable than relying on `file_ignore_patterns` alone.
+        find_command = {
+          "fd",
+          "--type",
+          "f",
+          "--hidden",
+          "--strip-cwd",
+          "--exclude",
+          ".git/",
+          "--exclude",
+          "node_modules/",
+          "--exclude",
+          ".next/",
+          "--exclude",
+          "dist/",
+          "--exclude",
+          ".vercel/",
+        },
+      },
+    },
   },
 }

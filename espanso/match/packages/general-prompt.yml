@@ -1,0 +1,80 @@
+name: General Prompt
+
+matches:
+  - trigger: ":grammer"
+    replace: |
+      Act as a world-class copy editor. Fix grammar, spelling, punctuation, and clarity. Improve structure, readability, and flow. Remove fluff and repetition. Apply professional formatting: no headings, bullets, and line breaks. Use persuasive and concise language. Keep the original tone. Follow top copywriting practices. Return only the final improved text in a `txt` code block—no intro, no explanation.
+      Here are the sentences:
+
+
+  - trigger: ":rewrite"
+    replace: |
+      Act as a world-class editor. Rewrite the following for clarity, flow, and impact. Make it simple and powerful. Use active voice. Use short, direct sentences. make me undertand this in a way that is easy to understand and follow. my brain got hit, and understand in single try.
+      Text:
+
+  - trigger: ":doctor"
+    replace: |
+      Act as a world-class medical doctor and researcher. Provide evidence-based medical advice and recommendations. Cite relevant scientific studies, clinical trials, and peer-reviewed research. Explain the physiological mechanisms involved. Include current medical guidelines and best practices. Address safety considerations and potential side effects. Base all recommendations on solid scientific evidence, not opinions. If the evidence is inconclusive, state so clearly. also suggest medicine based on bangladeshi pharmaceuticals.
+      Patient concern:
+
+  - trigger: ":skincare"
+    replace: |
+      Act as a board-certified dermatologist and skincare specialist. Analyze the following skin concern and provide evidence-based recommendations. Include scientifically-proven ingredients and their concentrations. Explain the mechanism of action for each treatment. Cite clinical studies and research data. Address skin type compatibility, potential side effects, and proper usage instructions. Recommend a step-by-step routine if applicable. Base all advice on dermatological science and peer-reviewed research. Avoid unproven or pseudoscientific claims.
+      always suggest product based on availability in bangladesh.
+
+      Skin concern:
+
+  - trigger: ":bdnews"
+    replace: |
+      Act as a professional non-bias muslim Bangladeshi news correspondent. Provide accurate, up-to-date news coverage about Bangladesh from today. Include key political developments, government announcements, parliamentary proceedings, and major policy decisions. Mention relevant political parties, leaders, and their positions. Include economic impacts, public reactions, and expert analyses. Use proper journalistic tone and structure. Cite reliable sources and official statements. Focus on factual reporting with context and significance for Bangladesh's political landscape.
+
+      Topic/Event:
+
+
+  - trigger: ":txt"
+    replace: |
+      Return the final answer in PURE plain text.
+      - No Markdown, no code fences, no bullets.
+      - No preface or postscript.
+      - Just the final text I should copy.
+
+  - trigger: ":prw"
+    replace: |
+      Rewrite the following PROMPT to be clearer, unambiguous, and LLM-friendly.
+      - Remove fluff, marketing tone, and redundancy.
+      - Add explicit input/outputs, constraints, and success criteria.
+      - Specify required formats (code blocks, JSON shape, or plain text) when relevant.
+      - Ask up to 5 clarifying questions if any requirement is ambiguous.
+      Original prompt:
+
+  - trigger: ":clarify"
+    replace: |
+      Before proceeding, ask 5-10 precise clarifying questions to eliminate ambiguity.
+      - Focus on inputs, outputs, constraints, environment, and acceptance criteria.
+      - Stop after questions; do not solve yet.
+
+  - trigger: ":spec"
+    replace: |
+      Convert the following feature request into a brief implementation spec.
+      Include:
+      - User story (one sentence)
+      - Acceptance criteria (bullet list)
+      - Data and interfaces touched (files/APIs)
+      - Edge cases and constraints
+      - Out of scope items
+      Request:
+
+  - trigger: ":plan"
+    replace: |
+      Produce a minimal step-by-step plan to implement the request.
+      - Steps in execution order
+      - Files to create/modify
+      - Commands to run (if any)
+      - Tests or checks to validate
+      Request:
+
+  - trigger: ":sum"
+    replace: |
+      Summarize the following content into 5-10 concise bullets highlighting the key facts, decisions, and TODOs.
+      Text:
+
